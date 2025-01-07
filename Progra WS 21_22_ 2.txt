@@ -1,0 +1,153 @@
+1b) [4 Punkte]
+Gegeben sei Folgende Klasse:
+
+Person.java
+
+public class Person{
+    
+    private String name;
+    private String mail;
+
+    public Person(String name, mail) {
+        this.name = name;
+        this.mail = mail;
+    }
+
+    @Override
+    public String toString() {
+        return name + " " + mail;
+    }
+}
+
+Beim Compilieren der Klasse gibt es folgende Fehlermeldung:
+
+Person.java:6: error: <identifier> expected
+    public Person(String name, mail) {
+
+Person.java:13: error: ";" expected
+    return name + " " + mail;
+
+Person.java:13: error: not a statement
+    return name + " " + mail;
+
+3 errors
+    
+
+Geben sie an in welchen Zeilen die Ursachen für die Felder sind, beschreiben Sie die Fehler jeweils kurz (max. 1 Satz) und geben Sie die 
+korrigierte Codezeile vollständig an, sodass der Code das tut, was bei der Programmierung wahrscheinlich vorgesehen war. Geben sie keine
+Folgefehler an, die durch Korrektur eines vorherrigen Fehlers behoben werden.
+
+Zeilennumer:
+Fehlerbeschreibung:
+Korrektur:
+
+Zeilennumer:
+Fehlerbeschreibung:
+Korrektur:
+
+Zeilennumer:
+Fehlerbeschreibung:
+Korrektur:
+
+(c) [2 Punkte]
+Sie haben eine Reihe von ganzzahligen Messwerten Zeilenweise in einer Textdatei /projekt/werte.txt gespeichert; ungültige Messerte sind als
+-1 gespeichert. Außerdem haben Sie ein java Programm *Filter*, das zeilenweise Integer einliest und alle Integer, die nicht -1 sind, wieder
+zeilenweise ausgibt.
+
+/projekt % ls
+Filter.class Filter.java werte.txt
+/projekt %
+
+Geben sie einen Befehl an, mit dem sie alle gültigen Messerte aus *werte.txt* in einer Datei *bereinigt.txt* speichern können:
+
+
+Aufgabe 2
+Formen sie die Kontrollstrukturen in den folgenden Codeauschnitten um, sodass sich die Semantik des Codes nicht ändert. Benutzen sie in
+ihren Code jeweils nur die von der Aufgabe vorgegebene Art von Kontrollstrukturen.
+
+(a) [2 Punkte] Formen sie die folgende for-Schleife in eine for-each-Schleife um:
+Vorgabe
+String[] namen = {"Alice", "Bob", "Charlie"};
+for(int index = 0; index < namen.length; index++) {
+    System.out.println(namen[] index);
+}
+Ihre Lösung
+String[] namen = {"Alice", "Bob", "Charlie"};
+
+
+
+
+(b) [3 Punkte] Formen sie die folgende switch-Verzweigung in eine if-Verzweigung um:
+Vorgabe
+int choice = 2;
+switch (choice){
+    case 1;
+    case 2;
+        System.out.print("Feuer");
+        break;
+    case 3;
+        System.out.print("Luft");
+        break;
+    default;
+        System.out.print("ungültig");
+}
+Ihre Lösung
+int choice = 2;
+
+
+Aufgabe 3
+(a) [1 Punkt]
+Gegeben sei der reguläre Ausdruck [a-z0-9] + [a-z]. Kreuzen sie alle Strings an, die vollständig von diesem Ausdruck gematcht werden.
+
+[]123a
+[]123A
+[]a123b
+[]1ab
+[]1a
+[]a
+
+(b) [1 Punkt]
+Der oben ausgegebene Ausdruck ist gleichbedeutend mit:
+[][A-Z0-9] + [A-Z]
+[][a-z0-9] *
+[][a-z0-9] * [a-z]
+[][a-z0-9] [a-z0-9] * [a-z]
+
+
+Aufgabe 4
+Für eine Finanzanwendung soll ein Programm für Zinseszinsrechnung erstellt werden. Vervollständigen sie dafür die Klasse *Zinsen*:
+
+(a) [3 Punkte]
+Schreiben sie eine private, statische Methode endkapital(double k0, double p, int n), die berechnet, auf welches Endkapital KkleinerN
+das Startkapital KkleinerO nach n Jahren bei einer jährlichen verzinsung von p gewachsen ist, und KkleinerN zurückgibt. Die Berechnungs-
+vorschrift lautet:
+KkleinerN = KkleinerO * (1 + p)^n
+Zur Erinnerung: MAth.pow(a, b) berechnet a^b.
+
+(b) [10 Punkte]
+Legen sie eine main Methode an, die das Startkapital (Kommazahl größer 0) und den Zinsatz (Kommazahl größer 0) in dieser Rheienfolge Kon-
+solenargumente entgegenimmt. Es soll dann jeweils das Endkapital nach 0, 1, 2 usw. Jahren ausgegeben werden, bis das Endkapital größer als
+das doppelte Startkapital ist.
+Wenn etwas anderes als zahlen, zu kleine zahlen oder zu wenige Zahlen angegeben werden, soll die Fehlermeldung "ungültige Eingabe" ausgege-
+ben werden. Zur Erinnerung: Die Methoden zum Parsen werfen im Fehlerfall eine NumberFormatException.
+
+Beispiele:
+% java Zinsen 100 0.05
+100.0
+105.0
+115.7625
+134.0095640625
+162.88946267774418
+207.89281794113683
+% java Zinsen 100
+ungültige Eingabe
+% java Zinsen 100 zwei
+ungültige Eingabe
+
+Zinsen.java
+public class Zinsen{
+    
+}
+
+
+
