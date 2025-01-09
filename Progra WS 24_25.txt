@@ -99,20 +99,38 @@
                 }
                 // Ergänzen Sie hier die Methoden teilersumme, istPerfekt und perfekteZahlen.
 
+                (a)
+                private static int teilersumme (int n) {
+                    int s = 0;
+                    for(int = 1; i < n;i++) {
+                        if(n % i == 0);
+                        s+=i;
+                    }
+                }
+                return s;
 
 
 
+                (b)
+                private static boolean istPerfekt (int n) [
+                    return teilersumme (n) == n;
+                ]
 
-
-
-
-
-                PerfekteZahlen.java (Fortsetung)
-
-
-
-
-
+                (c)
+                private static int[] perfekteZahlen (int anzahl) {
+                    if(anzahl < 0) {
+                        throw new IllegalArgumentException();
+                    }
+                    int[] perfekteZahlen = new int [anzahl];
+                    int i = 0;
+                    for(int n = 1; i < anzahl; n++) {
+                        if(istPerfekt(n)) {
+                            perfekteZahlen[i] = n;
+                            i++;
+                        }
+                    }
+                    return perfekteZahlen;
+                }
 
                 Aufgabe 3 
 
@@ -130,6 +148,7 @@
                         numbers[insertionPosition] = currentNumber;
                     }
                 }
+
                 Zwei Strings können mithilfe der öffentlichen Instanzmethode int compareTo(String other)
                 verglichen werden. Der Rückgabewert stellt hierbei das Ergebnis des Vergleichs wie folgt
                 dar ( a und b vom Typ String ):
@@ -147,6 +166,21 @@
 
                 Ihre Lösung Java
                 public static String[] sorted(String[] strings) {
+                    String[] c = new String[strings.length];
+                    for(int i = 0; i < c.length; i++) {
+                        c[i] = string[i];
+                    }
+                    for(currentIndex = 0; currentIndex < c.length; currentIndex++) {
+                        String currentString = c[currentIndex];
+                        int insertionPosition = currentIndex;
+                        while(insertionPosition > 0 && c [insertionPosition - 1].compareTo(currentString) < 0) {
+                            c[insertionPosition] = c[insertionPosition - 1];
+                            insertionPosition--;
+                        }
+                        c[insertionPosition] = currentString;
+                    }
+                    return c;
+                }
 
 
 
@@ -165,10 +199,15 @@
                         (a) Würden Sie eher Newtons oder Tracys Vorschlag umsetzen? Geben Sie einen nachvollziehbaren
                         Grund in 1–3 ausformulierten Sätzen an.
 
+                        Newtons vorschlag nicht Sinnvoll, weil er eine beliebige anzahl einlesen möchte und man für Arrays die anzahl schon
+                        vorher wissen muss.
+
 
                         (b) Newton erwidert, dass die Elemente einer verketteten Liste nicht mehr sortiert werden
                         können, nachdem Sie einmal hinzugefügt worden sind. Stimmen Sie dieser Aussage von
                         Newton zu? Begründen Sie Ihre Antwort in 1–2 ausformulierten Sätzen.
+
+                        Newton liegt falsch, Elemente einer verketteten liste können im nachhinein noch sortiert werden.
 
 
 
@@ -198,6 +237,11 @@
                             werden.
 
                             FakeWeather.java 
+                            public class FakeWeather implements Weather {
+                                public double getTemperature(); {
+                                return 2;
+                                }
+                            }
 
 
 
@@ -209,3 +253,18 @@
 
                                 Customer.java 
                                 public class Customer {
+                                    private String eMail;
+                                    private String name;
+
+                                    public Customer(String eMail, String name) {
+                                        this.name = name;
+                                        this.eMail = eMail;
+                                    }
+
+                                    public String getMail(){
+                                        return eMail;
+                                    }
+
+                                    public String getName() {
+                                        return name;
+                                    }

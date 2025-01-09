@@ -1,0 +1,660 @@
+1
+(b) [4 Punkte]
+Gegeben sei Folgende Klasse:
+
+Person.java
+
+public class Person{
+    private String name;
+
+    public Person(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public toString() {
+        return name;
+    }
+}
+
+Employee.java
+public class Employee extends person {
+    privat integer salary;
+
+    public Employee(String name, int salary) {
+        super(name);
+        this.salary = salary;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + ", " + salary;
+    }
+}}
+
+Beim Compilieren der Klasse gibt es folgende Fehlermeldung:
+
+Person.java:9: error: invalid methode declaration; retruns type required 
+    public toString() {
+
+Person.java:12: error: class, interface or num expected
+    }}
+
+Employee.java:2: error: cannot find Symbol
+    private integer salary;
+
+    Symbol: class integer
+    location class Employee
+
+Person.java:8: error: annotation type not applicable to this kind of declaration
+    @Override
+
+Person.java:10: error: incompatible types: unexpected return value
+    retrun name:
+
+5 errors
+    
+
+Geben sie an in welchen Zeilen die Ursachen für die Felder sind, beschreiben Sie die Fehler jeweils kurz (max. 1 Satz) und geben Sie die 
+korrigierte Codezeile vollständig an, sodass der Code das tut, was bei der Programmierung wahrscheinlich vorgesehen war. Geben sie keine
+Folgefehler an, die durch Korrektur eines vorherrigen Fehlers behoben werden.
+
+Zeilennumer:Person, 9
+Fehlerbeschreibung:Es fehlt das "String" vor dem toString
+Korrektur:public String toString() {
+
+Zeilennumer:Person, 12
+Fehlerbeschreibung:Eine schweifende klammer zu viel in zeile 12
+Korrektur:}
+
+Zeilennumer:Employee, 2
+Fehlerbeschreibung:es muss int statt integer heisen
+Korrektur:public int slaray; 
+
+Zeilennumer:
+Fehlerbeschreibung:
+Korrektur:
+
+
+(c) [2 Punkte]
+Sie haben eine Reihe von ganzzahligen Messwerten Zeilenweise in einer Textdatei /projekt/werte.txt gespeichert; ungültige Messerte sind als
+-1 gespeichert. Außerdem haben Sie ein java Programm *Filter*, das zeilenweise Integer einliest und alle Integer, die nicht -1 sind, wieder
+zeilenweise ausgibt.
+
+/projekt % ls
+Filter.class Filter.java werte.txt
+/projekt %
+
+Geben sie einen Befehl an, mit dem sie alle gültigen Messerte aus *werte.txt* in einer Datei *bereinigt.txt* speichern können:
+
+
+Aufgabe 2
+Formen sie die Kontrollstrukturen in den folgenden Codeauschnitten um, sodass sich die Semantik des Codes nicht ändert. Benutzen sie in
+ihren Code jeweils nur die von der Aufgabe vorgegebene Art von Kontrollstrukturen.
+
+(a) [2 Punkte] Formen sie die folgende for-each-Schleife in eine for-Schleife um:
+Vorgabe
+String[] namen = {"Alice", "Bob", "Charlie"};
+int index = 0;
+for (String name: namen) {
+    System.out.print(index + ": " + name);
+    index++
+}
+
+Ihre Lösung
+String[] namen = {"Alice", "Bob", "Charlie"};
+for(int index = 0; i < namen.length; i++) {
+    System.out.print(i + ": " + namen[i]);
+}
+
+
+
+
+(b) [3 Punkte] Formen sie die folgende switch-Verzweigung in eine if-Verzweigung um:
+Vorgabe
+int choice = 1;
+switch (choice){
+    case 1;
+    case 3;
+        System.out.print("Feuer");
+        break;
+    case 2;
+        System.out.print("Luft");
+        break;
+    default;
+        System.out.print("ungültig");
+}
+Ihre Lösung
+int choice = 1;
+if(choice == 1 || choice == 3) {
+    System.out.print("Feuer");
+}else if (choice == 2) {
+    System.out.print("Luft");
+}else {
+    System.out.print("ungültig")
+}
+
+Aufgabe 3
+
+Zweirpotzenzen leeren	 2^0,2^1 etc..
+Schreibe ein Java Programm Binner, das eine ganze zahl x als Konsolenarument entgegennimmt und die zweierpotenzen von 2^0 bis 2^x als ganze
+Zahlen auf der Standardausgabe ausgibt. Die ausgabe soll die Form  2^5^= 32 haben (siehe Beispiel). falls kein Argument oder keine ganze 
+zahl übergeben wird, soll sich das Program mit der Ausgabe err beenden.
+Zur Erinnerung: Die Parse-Methoden werfen im Fehlerfall eine NumberFormatException. math.pow(a, b) berechnet a^b und gibt einen Double zu-
+ück.
+
+Beispiel-Aufrufe
+% java Binner 4
+2^0 = 1
+2^1 = 2
+2^2 = 4
+2^3 = 8
+2^4 = 16
+% java Binner -3
+% java Binner 
+err
+% java Binner zwei
+err
+
+Binner.java
+
+public class Binner {
+    public static void main(String[] args) {
+
+        if(args.length == 0) {
+            System.out.print("err");
+            return;
+        }
+
+        int zahl;
+        try{
+            zahl = Integer.parseInt(args[0]);
+        }catch(NumberFormatException exception) {
+            System.out.print("err");
+            retrun;
+        }
+
+        for(int exponent = 0; exponent <= zahl; exponent++) {
+            int wert = (int) (Math.pow(2, exponent));
+            System.out.print("2^" + exponent + "= " + wert);
+        }
+
+    }
+}
+
+
+
+Aufgabe 3
+(a) [1 Punkt]
+Gegeben sei der reguläre Ausdruck [a-z0-9] + [a-z]. Kreuzen sie alle Strings an, die vollständig von diesem Ausdruck gematcht werden.
+
+[]123a
+[]123A
+[]a123b
+[]1ab
+[]1a
+[]a
+
+(b) [1 Punkt]
+Der oben ausgegebene Ausdruck ist gleichbedeutend mit:
+[][A-Z0-9] + [A-Z]
+[][a-z0-9] *
+[][a-z0-9] * [a-z]
+[][a-z0-9] [a-z0-9] * [a-z]
+
+
+Aufgabe 4
+Für eine Finanzanwendung soll ein Programm für Zinseszinsrechnung erstellt werden. Vervollständigen sie dafür die Klasse *Zinsen*:
+
+(a) [3 Punkte]
+Schreiben sie eine private, statische Methode endkapital(double k0, double p, int n), die berechnet, auf welches Endkapital KkleinerN
+das Startkapital KkleinerO nach n Jahren bei einer jährlichen verzinsung von p gewachsen ist, und KkleinerN zurückgibt. Die Berechnungs-
+vorschrift lautet:
+KkleinerN = KkleinerO * (1 + p)^n
+Zur Erinnerung: MAth.pow(a, b) berechnet a^b.
+
+public class Zinsen {
+    private static double endKapital (double KkleinerO, double p, int n) {
+        return KkleinerO * Math.pow(1 + p, n) ;
+    }
+}
+
+(b) [10 Punkte]
+Legen sie eine main Methode an, die das Startkapital (Kommazahl größer 0) und den Zinsatz (Kommazahl größer 0) in dieser Rheienfolge Kon-
+solenargumente entgegenimmt. Es soll dann jeweils das Endkapital nach 0, 1, 2 usw. Jahren ausgegeben werden, bis das Endkapital größer als
+das doppelte Startkapital ist.
+Wenn etwas anderes als zahlen, zu kleine zahlen oder zu wenige Zahlen angegeben werden, soll die Fehlermeldung "ungültige Eingabe" ausgege-
+ben werden. Zur Erinnerung: Die Methoden zum Parsen werfen im Fehlerfall eine NumberFormatException.
+
+Beispiele:
+% java Zinsen 100 0.05
+100.0
+105.0
+115.7625
+134.0095640625
+162.88946267774418
+207.89281794113683
+% java Zinsen 100
+ungültige Eingabe
+% java Zinsen 100 zwei
+ungültige Eingabe
+
+public static void main (String[] args) {
+    if (args.length < 2) {
+        System.out.print("ungültige Eingabe")
+        return;
+    }
+
+    double KkleinerO;
+    double p;
+    try {
+        KkleinerO = Double.parseDouble(args[0]);
+        p = Double.parseDouble(args[1]);
+    } catch (NumberFormatException exception) {
+        System.out.print("ungültige Eingabe");
+        return;
+    }
+    if (KkleinerO <= 0 || p <= 0) {
+        System.out.print("ungültige Eingabe");
+        return;
+    }
+    int n = 0;
+    do {
+        System.out.print("ungültige Eingabe");
+        n++;
+    } while (endKapital (KkleinerO, p, n - 1) <= KkleinerO * 2)
+}
+
+Aufgabe 5
+Gehen sie in dieser Aufgabe davon aus, dass n € N und n >= 1 gilt.
+Eine natürliche Zahl n ist eine perfekte Zahl, wenn die Summe ihrer natürlichen Teiler (n ausgeschlossen) gleich n ist. Die kleinste per-
+fekte ist 6 (Telersumme 1 + 2 + 3 = 6).
+Unten ist ein Programm *PerfekteZahlen* mit einer Beispielausgabe vorgegeben. Erweitern sie dieses Programm um folgende private, statische
+Methoden, damit das Programm wie im Beispiel funktioniert:
+(a) [4 Punkte] 
+Schreiben sie eine Methode int teilersumme(int n), welche die Summe aller natürlicher Teiler von n berechnet, wobei n selbst ausgeschlossen
+ist.
+
+(b) [3 Punkte]
+Schreiben sie eine Methode boolean istPerfekt(int n), die genau dann true zurückgibt, wenn n eine perfekte Zahl ist.
+
+(c) [6 Punkte]
+Schreiben sie eine Methode int[] PerfekteZahlen(int anzahl), die ein Array zurückgibt, das genau die ersten anzahl perfekten Zahlen enthält.
+Falls anzahl < 0 ist, soll eine IllegalArgumentException geworfen werden.
+
+Beispiel:
+% java PerfekteZahlen
+6 
+true
+false
+6 28
+
+PerfekteZahlen.java
+public class PerfekteZahlen {
+    public static void main (String[] args) {
+        System.out.println(teilersumme (6));
+        System.out.println(istPerfekt (6));
+        System.out.println(istPerfekt (12));
+
+        for(int zahl: perfekteZahlen(2)) {
+            System.out.print(zahl + " ");
+        }
+    }
+// Ergänzen sie hier die Methoden teilersumme, istPerfekt und perfekteZahlen.
+
+(a)
+private static int teilersumme (int n) {
+    int s = 0;
+    for(int = 1; i < n;i++) {
+        if(n % i == 0);
+        s+=i;
+    }
+}
+return s;
+
+(b)
+private static boolean istPerfekt (int n) [
+    return teilersumme (n) == n;
+]
+
+(c)
+private static int[] perfekteZahlen (int anzahl) {
+    if(anzahl < 0) {
+        throw new IllegalArgumentException();
+    }
+    int[] perfekteZahlen = new int [anzahl];
+    int i = 0;
+    for(int n = 1; i < anzahl; n++) {
+        if(istPerfekt(n)) {
+            perfekteZahlen[i] = n;
+            i++;
+        }
+    }
+    return perfekteZahlen;
+}
+
+Aufgabe 6
+Aus der Vorlesung kennen sie folgende Implementierung vo Insertion Sort die ein Array von Integern aufsteigend sortiert
+
+public static void sort (int[] numbers) {
+    for(int currentIndex = 0; currentIndex < numbers.length; currentIndex++) {
+        int currentNumber = numbers[currentIndex];
+        while(insertionPosition > 0 && numbers[insertionPosition - 1] > currentNumber){
+            numbers[insertionPosition] = numbers[insertionPosition - 1];
+            insertionPosition--;
+        }
+        numbers[insertionPosition] = currentNumber;
+    }
+}
+
+Gegeben sei die folgende Klasse:
+Studi.java
+public class Studi {
+    private final String name;
+    private final double radius;
+
+    public Circle(double r) {
+        radius = r;
+    }
+
+    //gibt den Flächeninhalt des Kreises zurück
+    public double area() {
+        return Math.PI * radius * radius;
+    }
+}
+
+(a) [6 Punkte]
+Ergänzen sie die Klasse um eine öffentliche, statische Methode sort, die ein Array von Circle-Objekten übergeben bekommt und absteigend
+nach ihrem Flächeninhalt sortiert; das übergebene Array soll dabei von der Methode verändert werden (die Methode hat also keinen rückgabe-
+wert). Gehen sie davon aus, das kein wert im übergebenen Array null ist. Falls der Methode null übergeben wird, soll es keine Exception
+geben (die Methode macht also nichts)
+
+Lösung:
+public static void sort (Circle[] cs) {
+    if(cs == null) {
+        return;
+    }
+}
+for(int ci = 0; ci < cs.length; ci++) {
+    Circle cs = cs[i];
+    int ip = ci;
+    while(ip > 0 && cs [ip - 1] < cc.area()) {
+        cs[ip] = cs[ip - 1];
+    }
+    cs [ip] = cc;
+}
+
+Circle.java (Fortsetung)
+
+(b) [2 Punkte]
+Angenommen, sie müssten häugiger 1 Millionen Kreise nach ihrer Größe sortieren. Würden sie dafür eine Sortiermethode benutzen, die In-
+sertion Sort verwendet? Begründen sie ihre Antwort in 1-2 Sätzen und schlagen sie ggf. eine Alternative vor.
+
+Lösung:
+Nein, da Insertion-Sort ein langsames Sortierverfahren ist, als Alternative würde ich Mergesort nutzen.
+
+Aufgabe 7
+Gegeben sei die folgende Klasse List, die eine einfach verkettete Liste implemetiert, in der Integer gespeichert werden können:
+
+List.java
+public class List {
+    private class Node {
+        private int data;
+        private Node next;
+
+        private Node(int data, Node next) {
+            this.data = data;
+            this.next = next;
+        }
+    }
+    pricate Node head;
+
+    // fügt value vorne in die Liste ein
+    public void prepend(int value) {
+        head = new Node (value, head);
+    }
+}
+
+(a) [6 Punkte]
+Vervollständigen sie die Implementierung der Methode int removeNegative(), die alle Zahlen aud der Liste entfernt, die negativ sind. Der
+Rückgabewert soll angeben, wie viele Zahlen entfernt worden sind.
+
+List.java (Fortsetung)
+public int removeNegative() {
+    int anzahlLoeschungen = __0___;
+    while(head != null && ______head.data < 0______) {
+        ____head = head.next________;
+        ______anzahlLoeschungen++______;
+    }
+    _____Node current = head_______;
+    while(__current != null__________) {
+        while(current.next != null && ____current.next.data < 0________) {
+            current.next = _____current.next.next_______;
+            anzahlLoeschungen++;
+        }
+        current = ____current.next________;
+    }
+    ___return anzahlLoeschungen_________;
+ }
+}
+
+(b) [3 Punkte]
+Alice möchte in einem größerem Programmierprojekt verkettete Listen benutzen. Sie schlägt vor, eine generische Klasse List<T> selbst zu
+implementieren. Bob sagt, dass die lieber die fertige Klasse java.util.LinkedList<T> aus dem JDK verwenden sollte.
+
+(i)
+Würden sie eher den Vorschlag von Alice oder den von Bob umsetzen? Geben sie einen nachvollziehbaren Grund in 1-3 ausformulierten Sätzen an.
+
+Antwort:
+Ich würde auf Bob hören, da fertige Listen besser getestet sind, sie zeit sparen & auch mit anderen Bibiotheken kompatibel sind.
+
+Alice erwiedert, dass die ihre eigene Klasse bevorzugt, weil sie nicht jedes mal, wenn sie eine LinkedList erstellt, das längliche new 
+java.util.LinkedList<>() benutzen möchte.
+
+(ii)
+Halten sie dieses Argument von Alice für ein nachvollziehbares/starkes Argument? Begründen sie ihre Antwort in 1-2 ausformulierten sätzen.
+
+Antwort:
+Kein gutes argument, da man LinkedList auch einfach importieren kann.
+
+
+Aufgabe 8
+Gegeben sei die Klasse SearchTree für einen binären Suchbaum, in dem Doubles gespeichert werden können:
+
+SearchTree.java
+public class SearchTree {
+    private class BinaryNode {
+        private double element;
+        private BinaryNode left, right;
+
+        private BinaryNode (double element) {
+            this.element = element;
+        }
+    }
+
+    //fügt newNumber in den Baum ein
+    public void insert (double newNumber) {
+        // (Implementierung nicht abgedruckt)
+    }
+}
+
+Vervollständigen die die Methode double sumGreaterThan(double t), die die Summe aller Einträge im Baum zurückgibt, die größer als t sind;
+bei einem leeren Suchbaum ist diese Summe gleich 0. Nutzen sie in ihrem code Eigenschafften eines binären Suchbaumes aus, um die Anzahl der
+betrachteten Knoten minimal zu halten. Sie dürfen zusätzliche Hilfsmethoden mit minimaler Sichtbarkeit schreiben.
+
+SearchTree.java (Fortsetung)
+public double sumGreaterThan(double t) {
+    return sumGreaterThan(t, root);
+}
+private static double sumGreaterThan(double t, BinaryRoot str) {
+    if(str == null) {
+        return 0;
+    }
+    if(str.element <= t) {
+        return sumGreaterThan(t, root.right);
+    }
+    return str.element + sumGreaterThan(t, root.left) + sumGreaterThan(t, root.right);
+}
+
+Aufgabe 9
+In dieser Aufgabe sollen sie Klassen und Methoden für ein Computerspiel implementieren.
+
+Hinweise:
+-Sie dürfen alle Variablennamen frei wählen.
+-Alle Instanzvariablen müssen privat sein
+-Das genaue format der Textausgaben ist ihne überlassen.
+-Innerhalb dieseer Aufgaben müssen sie keine Exception abfangen. Sie müssen keine Parameter vallidieren.
+-Lesen sie sich die aufgabe stelleung vor Beginn der Implementierung vollständig durch, um einen besser überblick über das Gesamtbild zu
+erhalten
+-Gehen sie davon aus, dass alle in dieser Aufgabe gennatnten Klassen im selben Package liegen
+
+(a) [8 Punkte]
+Schreiben sie eine abstrakte, öffentliche Klasse Task, in welcher es eine Objektvariable gibt, die angibt, ob der task beendet ist oder 
+nicht; standardmäßig sind neu erstellte TAsk nicht beendet. Über eine öffentliche Methode void finish() soll ein task auf beendet gesetzt
+werden können. Mit einer öffentlichen Methode isFinished() soll abgefragt werden können, ob der Task beendet ist.
+Außerdem soll es einen öffentlichen Konstruktor geben, dem der name des TAsks übergeben werden kann, und eine abstrakte, öffentliche Me-
+thode getDuration(), die die Länge des TAsks (in Sekunden) zurückgibt. 
+Die toString Methode solll überschrieben werden, sodass Name und länge des Tasks und ob dieser beendet ist oder nicht zurückgegeben werden.
+
+Task.java
+
+public abstract class Task {
+    private boolean f = false;
+    private String name;
+
+    public Task (String name) {
+        this.name = name;
+    }
+
+    public void finish() {
+        f = true;
+    }
+
+    public boolean isFinished() {
+        return f;
+    }
+
+    public abstract in getDuration() {
+
+    }
+
+    public String toString() {
+        return name + f + getDuration();
+    }
+}
+
+(b) [6 Punkte]
+Implementieren sie zwei nicht abstrakte, öffentliche Klassen LongTask und ShortTask, die sinnvoll von Task erben. Jeder LongTask dauert 10
+Sekunden jeder ShortTask 5 Sekunden.
+Den öffentlichen Konstruktoren beider Klassen soll übergeben werden, wie die Tasks heißen; diese Information soll auf geeignete Weise Mit-
+hilfe der Oberklasse gespeichert werden.
+
+LongTask.java
+public class LongTask extends Task {
+    public LongTask (String name) {
+        super(name);
+    }
+
+    public int getDuration() {
+        return 10;
+    }
+}
+
+ShortTask.java
+
+public class ShortTask extends Task {
+    public ShortTask (String name) {
+        super(name);
+    }
+
+    public int getDuration() {
+        return 5;
+    }
+}
+
+
+(c) [8 Punkte]
+Erstellen sie eine nicht abstrakte, öffentliche Klasse Player. Jedes Player-Objekt speichert einen namen und ein Array von beliebig vielen
+Tasks, die beide dem öffentlichen Konstruktor als Parameter übergeben werden.
+Schreiben sie eine öffentliche Objektmethode finishTask(int number), die den Task an der Stelle number im Array auf beendet setzt und kei-
+nen Rückgabewert hat. 
+Außerdem soll die toString-Methode überschrieben werden, sodass zuerst der spielername, alle nicht beendeten Tasks und danach alle beende-
+ten Tasks als ein String zurückgegeben werden.
+
+Player.java
+public class Player {
+    private String n;
+    private Task[] ts;
+
+    public Player (String n2, Task[] ts2) {
+        n=n2;
+        t=t2
+    }
+
+    public void finishTask (int nn) {
+        task[nn] finish();
+    }
+
+    public String toString() {
+        String out = name;
+        for(Task t: ts) {
+            if( !t.isFinished) {
+                out t = t;
+            }
+        }
+        for(Task t: ts) {
+            if(t.isFinished) {
+                out t = b;
+            }
+        }
+        return out;
+    }
+}
+
+
+(d) [5 Punkte] 
+Ergänzen sie die Main-Methode der Klasse Game, sodass folgendes passiert:
+
+1. Ein ShortTask mit namen "A"  und ein LongTask mit dem Namen "B" werden erstellt.
+2. Ein player mit Namen "S" und den Tasks A und B wird erstellt.
+3. S beendet genau einen der beiden Tasks (egal welchen).
+4. Die String-Repräsentation des Player Objekts wird ausgegeben.
+
+Game.java
+public class Game {
+    public static void main (String[] args) {
+        Task[] ts {
+            new ShortTask("A");
+            new LongTask("B");
+        }
+        Player p = new Player ("S", ts);
+
+        p.finishTask(A);
+        System.out.println(p);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
