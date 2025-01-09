@@ -1,4 +1,5 @@
-1b) [4 Punkte]
+1
+(b) [4 Punkte]
 Gegeben sei Folgende Klasse:
 
 Person.java
@@ -124,6 +125,12 @@ vorschrift lautet:
 KkleinerN = KkleinerO * (1 + p)^n
 Zur Erinnerung: MAth.pow(a, b) berechnet a^b.
 
+public class Zinsen {
+    private static double endKapital (double KkleinerO, double p, int n) {
+        return KkleinerO * Math.pow(1 + p, n) ;
+    }
+}
+
 (b) [10 Punkte]
 Legen sie eine main Methode an, die das Startkapital (Kommazahl größer 0) und den Zinsatz (Kommazahl größer 0) in dieser Rheienfolge Kon-
 solenargumente entgegenimmt. Es soll dann jeweils das Endkapital nach 0, 1, 2 usw. Jahren ausgegeben werden, bis das Endkapital größer als
@@ -144,10 +151,421 @@ ungültige Eingabe
 % java Zinsen 100 zwei
 ungültige Eingabe
 
-Zinsen.java
-public class Zinsen{
-    
+public static void main (String[] args) {
+    if (args.length < 2) {
+        System.out.print("ungültige Eingabe")
+        return;
+    }
+
+    double KkleinerO;
+    double p;
+    try {
+        KkleinerO = Double.parseDouble(args[0]);
+        p = Double.parseDouble(args[1]);
+    } catch (NumberFormatException exception) {
+        System.out.print("ungültige Eingabe");
+        return;
+    }
+    if (KkleinerO <= 0 || p <= 0) {
+        System.out.print("ungültige Eingabe");
+        return;
+    }
+    int n = 0;
+    do {
+        System.out.print("ungültige Eingabe");
+        n++;
+    } while (endKapital (KkleinerO, p, n - 1) <= KkleinerO * 2)
 }
+
+Aufgabe 5
+Gehen sie in dieser Aufgabe davon aus, dass n € N und n >= 1 gilt.
+Eine natürliche Zahl n ist eine perfekte Zahl, wenn die Summe ihrer natürlichen Teiler (n ausgeschlossen) gleich n ist. Die kleinste per-
+fekte ist 6 (Telersumme 1 + 2 + 3 = 6).
+Unten ist ein Programm *PerfekteZahlen* mit einer Beispielausgabe vorgegeben. Erweitern sie dieses Programm um folgende private, statische
+Methoden, damit das Programm wie im Beispiel funktioniert:
+(a) [4 Punkte] 
+Schreiben sie eine Methode int teilersumme(int n), welche die Summe aller natürlicher Teiler von n berechnet, wobei n selbst ausgeschlossen
+ist.
+
+(b) [3 Punkte]
+Schreiben sie eine Methode boolean istPerfekt(int n), die genau dann true zurückgibt, wenn n eine perfekte Zahl ist.
+
+(c) [6 Punkte]
+Schreiben sie eine Methode int[] PerfekteZahlen(int anzahl), die ein Array zurückgibt, das genau die ersten anzahl perfekten Zahlen enthält.
+Falls anzahl < 0 ist, soll eine IllegalArgumentException geworfen werden.
+
+Beispiel:
+% java PerfekteZahlen
+6 
+true
+false
+6 28
+
+PerfekteZahlen.java
+public class PerfekteZahlen {
+    public static void main (String[] args) {
+        System.out.println(teilersumme (6));
+        System.out.println(istPerfekt (6));
+        System.out.println(istPerfekt (12));
+
+        for(int zahl: perfekteZahlen(2)) {
+            System.out.print(zahl + " ");
+        }
+    }
+// Ergänzen sie hier die Methoden teilersumme, istPerfekt und perfekteZahlen.
+
+(a)
+private static int teilersumme (int n) {
+    int s = 0;
+    for(int = 1; i < n;i++) {
+        if(n % i == 0);
+        s+=i;
+    }
+}
+return s;
+
+(b)
+private static boolean istPerfekt (int n) [
+    return teilersumme (n) == n;
+]
+
+(c)
+private static int[] perfekteZahlen (int anzahl) {
+    if(anzahl < 0) {
+        throw new IllegalArgumentException();
+    }
+    int[] perfekteZahlen = new int [anzahl];
+    int i = 0;
+    for(int n = 1; i < anzahl; n++) {
+        if(istPerfekt(n)) {
+            perfekteZahlen[i] = n;
+            i++;
+        }
+    }
+    return perfekteZahlen;
+}
+
+Aufgabe 6
+Aus der Vorlesung kennen sie folgende Implementierung vo Insertion Sort die ein Array von Integern aufsteigend sortiert
+
+public static void sort (int[] numbers) {
+    for(int currentIndex = 0; currentIndex < numbers.length; currentIndex++) {
+        int currentNumber = numbers[currentIndex];
+        while(insertionPosition > 0 && numbers[insertionPosition - 1] > currentNumber){
+            numbers[insertionPosition] = numbers[insertionPosition - 1];
+            insertionPosition--;
+        }
+        numbers[insertionPosition] = currentNumber;
+    }
+}
+
+Gegeben sei die folgende Klasse:
+Circle.java
+public class Circle {
+    private final double radius;
+
+    public Circle(double r) {
+        radius = r;
+    }
+
+    //gibt den Flächeninhalt des Kreises zurück
+    public double area() {
+        return Math.PI * radius * radius;
+    }
+}
+
+(a) [6 Punkte]
+Ergänzen sie die Klasse um eine öffentliche, statische Methode sort, die ein Array von Circle-Objekten übergeben bekommt und absteigend
+nach ihrem Flächeninhalt sortiert; das übergebene Array soll dabei von der Methode verändert werden (die Methode hat also keinen rückgabe-
+wert). Gehen sie davon aus, das kein wert im übergebenen Array null ist. Falls der Methode null übergeben wird, soll es keine Exception
+geben (die Methode macht also nichts)
+
+Lösung:
+public static void sort (Circle[] cs) {
+    if(cs == null) {
+        return;
+    }
+}
+for(int ci = 0; ci < cs.length; ci++) {
+    Circle cs = cs[i];
+    int ip = ci;
+    while(ip > 0 && cs [ip - 1] < cc.area()) {
+        cs[ip] = cs[ip - 1];
+    }
+    cs [ip] = cc;
+}
+
+Circle.java (Fortsetung)
+
+(b) [2 Punkte]
+Angenommen, sie müssten häugiger 1 Millionen Kreise nach ihrer Größe sortieren. Würden sie dafür eine Sortiermethode benutzen, die In-
+sertion Sort verwendet? Begründen sie ihre Antwort in 1-2 Sätzen und schlagen sie ggf. eine Alternative vor.
+
+Lösung:
+Nein, da Insertion-Sort ein langsames Sortierverfahren ist, als Alternative würde ich Mergesort nutzen.
+
+Aufgabe 7
+Gegeben sei die folgende Klasse List, die eine einfach verkettete Liste implemetiert, in der Integer gespeichert werden können:
+
+List.java
+public class List {
+    private class Node {
+        private int data;
+        private Node next;
+
+        private Node(int data, Node next) {
+            this.data = data;
+            this.next = next;
+        }
+    }
+    pricate Node head;
+
+    // fügt value vorne in die Liste ein
+    public void prepend(int value) {
+        head = new Node (value, head);
+    }
+}
+
+(a) [6 Punkte]
+Vervollständigen sie die Implementierung der Methode int removeNegative(), die alle Zahlen aud der Liste entfernt, die negativ sind. Der
+Rückgabewert soll angeben, wie viele Zahlen entfernt worden sind.
+
+List.java (Fortsetung)
+public int removeNegative() {
+    int anzahlLoeschungen = __0___;
+    while(head != null && ______head.data < 0______) {
+        ____head = head.next________;
+        ______anzahlLoeschungen++______;
+    }
+    _____Node current = head_______;
+    while(__current != null__________) {
+        while(current.next != null && ____current.next.data < 0________) {
+            current.next = _____current.next.next_______;
+            anzahlLoeschungen++;
+        }
+        current = ____current.next________;
+    }
+    ___return anzahlLoeschungen_________;
+ }
+}
+
+(b) [3 Punkte]
+Alice möchte in einem größerem Programmierprojekt verkettete Listen benutzen. Sie schlägt vor, eine generische Klasse List<T> selbst zu
+implementieren. Bob sagt, dass die lieber die fertige Klasse java.util.LinkedList<T> aus dem JDK verwenden sollte.
+
+(i)
+Würden sie eher den Vorschlag von Alice oder den von Bob umsetzen? Geben sie einen nachvollziehbaren Grund in 1-3 ausformulierten Sätzen an.
+
+Antwort:
+Ich würde auf Bob hören, da fertige Listen besser getestet sind, sie zeit sparen & auch mit anderen Bibiotheken kompatibel sind.
+
+Alice erwiedert, dass die ihre eigene Klasse bevorzugt, weil sie nicht jedes mal, wenn sie eine LinkedList erstellt, das längliche new 
+java.util.LinkedList<>() benutzen möchte.
+
+(ii)
+Halten sie dieses Argument von Alice für ein nachvollziehbares/starkes Argument? Begründen sie ihre Antwort in 1-2 ausformulierten sätzen.
+
+Antwort:
+Kein gutes argument, da man LinkedList auch einfach importieren kann.
+
+
+Aufgabe 8
+Gegeben sei die Klasse SearchTree für einen binären Suchbaum, in dem Doubles gespeichert werden können:
+
+SearchTree.java
+public class SearchTree {
+    private class BinaryNode {
+        private double element;
+        private BinaryNode left, right;
+
+        private BinaryNode (double element) {
+            this.element = element;
+        }
+    }
+
+    //fügt newNumber in den Baum ein
+    public void insert (double newNumber) {
+        // (Implementierung nicht abgedruckt)
+    }
+}
+
+Vervollständigen die die Methode double sumGreaterThan(double t), die die Summe aller Einträge im Baum zurückgibt, die größer als t sind;
+bei einem leeren Suchbaum ist diese Summe gleich 0. Nutzen sie in ihrem code Eigenschafften eines binären Suchbaumes aus, um die Anzahl der
+betrachteten Knoten minimal zu halten. Sie dürfen zusätzliche Hilfsmethoden mit minimaler Sichtbarkeit schreiben.
+
+SearchTree.java (Fortsetung)
+public double sumGreaterThan(double t) {
+    return sumGreaterThan(t, root);
+}
+private static double sumGreaterThan(double t, BinaryRoot str) {
+    if(str == null) {
+        return 0;
+    }
+    if(str.element <= t) {
+        return sumGreaterThan(t, root.right);
+    }
+    return str.element + sumGreaterThan(t, root.left) + sumGreaterThan(t, root.right);
+}
+
+Aufgabe 9
+In dieser Aufgabe sollen sie Klassen und Methoden für ein Computerspiel implementieren.
+
+Hinweise:
+-Sie dürfen alle Variablennamen frei wählen.
+-Alle Instanzvariablen müssen privat sein
+-Das genaue format der Textausgaben ist ihne überlassen.
+-Innerhalb dieseer Aufgaben müssen sie keine Exception abfangen. Sie müssen keine Parameter vallidieren.
+-Lesen sie sich die aufgabe stelleung vor Beginn der Implementierung vollständig durch, um einen besser überblick über das Gesamtbild zu
+erhalten
+-Gehen sie davon aus, dass alle in dieser Aufgabe gennatnten Klassen im selben Package liegen
+
+(a) [8 Punkte]
+Schreiben sie eine abstrakte, öffentliche Klasse Task, in welcher es eine Objektvariable gibt, die angibt, ob der task beendet ist oder 
+nicht; standardmäßig sind neu erstellte TAsk nicht beendet. Über eine öffentliche Methode void finish() soll ein task auf beendet gesetzt
+werden können. Mit einer öffentlichen Methode isFinished() soll abgefragt werden können, ob der Task beendet ist.
+Außerdem soll es einen öffentlichen Konstruktor geben, dem der name des TAsks übergeben werden kann, und eine abstrakte, öffentliche Me-
+thode getDuration(), die die Länge des TAsks (in Sekunden) zurückgibt. 
+Die toString Methode solll überschrieben werden, sodass Name und länge des Tasks und ob dieser beendet ist oder nicht zurückgegeben werden.
+
+Task.java
+
+public abstract class Task {
+    private boolean f = false;
+    private String name;
+
+    public Task (String name) {
+        this.name = name;
+    }
+
+    public void finish() {
+        f = true;
+    }
+
+    public boolean isFinished() {
+        return f;
+    }
+
+    public abstract in getDuration() {
+
+    }
+
+    public String toString() {
+        return name + f + getDuration();
+    }
+}
+
+(b) [6 Punkte]
+Implementieren sie zwei nicht abstrakte, öffentliche Klassen LongTask und ShortTask, die sinnvoll von Task erben. Jeder LongTask dauert 10
+Sekunden jeder ShortTask 5 Sekunden.
+Den öffentlichen Konstruktoren beider Klassen soll übergeben werden, wie die Tasks heißen; diese Information soll auf geeignete Weise Mit-
+hilfe der Oberklasse gespeichert werden.
+
+LongTask.java
+public class LongTask extends Task {
+    public LongTask (String name) {
+        super(name);
+    }
+
+    public int getDuration() {
+        return 10;
+    }
+}
+
+ShortTask.java
+
+public class ShortTask extends Task {
+    public ShortTask (String name) {
+        super(name);
+    }
+
+    public int getDuration() {
+        return 5;
+    }
+}
+
+
+(c) [8 Punkte]
+Erstellen sie eine nicht abstrakte, öffentliche Klasse Player. Jedes Player-Objekt speichert einen namen und ein Array von beliebig vielen
+Tasks, die beide dem öffentlichen Konstruktor als Parameter übergeben werden.
+Schreiben sie eine öffentliche Objektmethode finishTask(int number), die den Task an der Stelle number im Array auf beendet setzt und kei-
+nen Rückgabewert hat. 
+Außerdem soll die toString-Methode überschrieben werden, sodass zuerst der spielername, alle nicht beendeten Tasks und danach alle beende-
+ten Tasks als ein String zurückgegeben werden.
+
+Player.java
+public class Player {
+    private String n;
+    private Task[] ts;
+
+    public Player (String n2, Task[] ts2) {
+        n=n2;
+        t=t2
+    }
+
+    public void finishTask (int nn) {
+        task[nn] finish();
+    }
+
+    public String toString() {
+        String out = name;
+        for(Task t: ts) {
+            if( !t.isFinished) {
+                out t = t;
+            }
+        }
+        for(Task t: ts) {
+            if(t.isFinished) {
+                out t = b;
+            }
+        }
+        return out;
+    }
+}
+
+
+(d) [5 Punkte] 
+Ergänzen sie die Main-Methode der Klasse Game, sodass folgendes passiert:
+
+1. Ein ShortTask mit namen "A"  und ein LongTask mit dem Namen "B" werden erstellt.
+2. Ein player mit Namen "S" und den Tasks A und B wird erstellt.
+3. S beendet genau einen der beiden Tasks (egal welchen).
+4. Die String-Repräsentation des Player Objekts wird ausgegeben.
+
+Game.java
+public class Game {
+    public static void main (String[] args) {
+        Task[] ts {
+            new ShortTask("A");
+            new LongTask("B");
+        }
+        Player p = new Player ("S", ts);
+
+        p.finishTask(A);
+        System.out.println(p);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

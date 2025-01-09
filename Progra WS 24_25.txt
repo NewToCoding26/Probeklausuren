@@ -1,0 +1,211 @@
+(a) Sie haben eine Reihe von ganzzahligen Messwerten zeilenweise in der Textdatei
+    /projekt/werte.txt gespeichert; ungültige Messwerte sind als −1 gespeichert. Außerdem
+    haben Sie ein Java-Programm Filter , das zeilenweise Integer von der Standardeingabe
+    einliest und alle Integer, die nicht −1 sind, wieder zeilenweise auf der
+    Standardausgabe ausgibt.
+
+    /projekt % ls
+    Filter.class Filter.java werte.txt
+    /projekt %
+
+    Geben Sie einen Befehl an, mit dem Sie alle gültigen Messwerte aus werte.txt in
+    einer Datei bereinigt.txt speichern können:
+
+    (b) Gegeben sei die folgende Klasse:
+            Person.java Java
+            1 public class Person {
+            2
+            3   private String name;
+            4   private String mail;
+            5
+            6   public Person(String name, mail) {
+            7       this.name = name;
+            8       this.mail = mail;
+            9   }
+            10
+            11  @Override
+            12  public String toString() {
+            13      return name + " " mail;
+            14   }
+            15
+            16 }
+
+            Beim Compilieren der Klasse gibt es folgende Fehlermeldungen:
+            Person.java:6: error: <identifier> expected
+            public Person(String name, mail) {
+            ^
+            Person.java:13: error: ';' expected
+            return name + " " mail;
+            ^
+            Person.java:13: error: not a statement
+            return name + " " mail;
+            ^
+            3 errors
+
+            Geben Sie an, in welchen Zeilen die Ursachen für die Fehler sind, beschreiben Sie die
+            Fehler jeweils kurz (max. 1 Satz) und geben Sie die korrigierte Codezeile vollständig
+            an, sodass der Code das tut, was bei der Programmierung wahrscheinlich vorgesehen
+            war. Geben Sie keine Folgefehler an, die durch Korrektur eines vorherigen Fehlers
+            behoben werden.
+
+            Zeilennummer:
+            Fehlerbeschreibung:
+            Korrektur:
+
+            Zeilennummer:
+            Fehlerbeschreibung:
+            Korrektur:
+
+            Zeilennummer:
+            Fehlerbeschreibung:
+            Korrektur:
+
+            Aufgabe 2 
+                Gehen Sie in dieser Aufgabe davon aus, dass n ∈ N und n ≥ 1 gilt.
+
+                Eine natürliche Zahl n ist eine perfekte Zahl, wenn die Summe ihrer natürlichen Teiler (n
+                ausgeschlossen) gleich n ist. Die kleinste perfekte Zahl ist 6 (Teilersumme 1 + 2 + 3 = 6).
+
+                Unten ist ein Programm PerfekteZahlen mit einer Beispielausgabe vorgegeben. Erweitern
+                Sie dieses Programm um folgende private, statische Methoden, damit das Programm wie
+                im Beispiel funktioniert:
+
+                (a) Schreiben Sie eine Methode int teilersumme(int n) , welche die Summe aller natürlichen
+                Teiler von n berechnet, wobei n selbst ausgeschlossen ist.
+
+                (b) Schreiben Sie eine Methode boolean istPerfekt(int n) , die genau dann true
+                zurückgibt, wenn n eine perfekte Zahl ist.
+
+                (c) Schreiben Sie eine Methode int[] perfekteZahlen(int anzahl) , die ein Array zurückgibt,
+                das genau die ersten anzahl perfekten Zahlen enthält.
+
+                Beispiel:
+                % java PerfekteZahlen
+                6
+                true
+                false
+                6 28
+
+                PerfekteZahlen.java 
+                public class PerfekteZahlen {
+                    public static void main(String[] args) {
+                        System.out.println(teilersumme(6));
+                        System.out.println(istPerfekt(6));
+                        System.out.println(istPerfekt(12));
+                        for(int zahl: perfekteZahlen(2)) {
+                            System.out.print(zahl + " " );
+                        }
+                    }
+                }
+                // Ergänzen Sie hier die Methoden teilersumme, istPerfekt und perfekteZahlen.
+
+
+
+
+
+
+
+
+
+                PerfekteZahlen.java (Fortsetung)
+
+
+
+
+
+
+                Aufgabe 3 
+
+                Aus der Vorlesung kennen Sie folgende Implementierung von Insertion Sort, die ein Array
+                von Integern aufsteigend sortiert:
+
+                public static void sort(int[] numbers) {
+                    for(int currentIndex = 0; currentIndex < numbers.length; currentIndex++) {
+                        int currentNumber = numbers[currentIndex];
+                        int insertionPosition = currentIndex;
+                            while(insertionPosition > 0 && numbers[insertionPosition - 1] > currentNumber) {
+                            numbers[insertionPosition] = numbers[insertionPosition - 1];
+                        insertionPosition--;
+                        }
+                        numbers[insertionPosition] = currentNumber;
+                    }
+                }
+                Zwei Strings können mithilfe der öffentlichen Instanzmethode int compareTo(String other)
+                verglichen werden. Der Rückgabewert stellt hierbei das Ergebnis des Vergleichs wie folgt
+                dar ( a und b vom Typ String ):
+
+                a.compareTo(b) == 0 → a und b sind gleich
+                a.compareTo(b) > 0 → a ist lexikographisch größer als b
+                a.compareTo(b) < 0 → a ist lexikographisch kleiner als b
+
+                Vervollständigen Sie die Methode sorted , die ein Array von String -Objekten übergeben
+                bekommt und ein neues Array zurückgeben soll, in dem dieselben Strings lexikographisch
+                absteigend sortiert sind; die Reihenfolge der Strings im übergebenen Array soll von der
+                Methode nicht verändert werden; das Original-Array und das sortierte Array sollen dieselben
+                Objekte im Heap referenzieren. Sie dürfen davon ausgehen, dass der Methoden-
+                Parameter strings ungleich null ist und keine Werte enthält, die null sind.
+
+                Ihre Lösung Java
+                public static String[] sorted(String[] strings) {
+
+
+
+
+
+
+
+                    Aufgabe 4 
+                        Newton möchte ein Programm schreiben, das über die Standardeingabe eine beliebige
+                        Anzahl von Unikennungen einlesen kann und anschließend alphabetisch sortiert. Er schlägt
+                        vor, die Unikennungen dafür in einem Array der Größe 200 zu speichern und anschließend
+                        zu sortieren.
+
+                        Tracy sagt, dass er lieber eine einfach verkettete Liste verwenden sollte.
+
+                        (a) Würden Sie eher Newtons oder Tracys Vorschlag umsetzen? Geben Sie einen nachvollziehbaren
+                        Grund in 1–3 ausformulierten Sätzen an.
+
+
+                        (b) Newton erwidert, dass die Elemente einer verketteten Liste nicht mehr sortiert werden
+                        können, nachdem Sie einmal hinzugefügt worden sind. Stimmen Sie dieser Aussage von
+                        Newton zu? Begründen Sie Ihre Antwort in 1–2 ausformulierten Sätzen.
+
+
+
+                        Aufgabe 5 
+                            In dieser Aufgabe sollen Sie Interfaces, Klassen und Methoden für eine Marketinganwendung
+                            eines Restaurants nach gewissen Vorgaben implementieren. Eine andere Person integriert
+                            dann später Ihre Klasse in die Gesamtanwendung.
+
+                            Hinweise:
+
+                            • Sie dürfen alle Variablennamen frei wählen.
+                            • Wählen Sie sinnvolle Datentypen für Ihre Variablen.
+                            • Alle Instanzvariablen müssen privat sein.
+                            • Wenn kein Konstruktorverhalten vorgeschrieben ist, reicht der Default-Konstruktor.
+                            • Innerhalb dieser Aufgabe müssen Sie keine Parameter validieren.
+
+                            Gegeben ist folgendes Interface:
+
+                            Weather.java Java
+                            public interface Weather {
+                                // gibt die aktuelle Temperatur in Grad Celsius zurück
+                                double getTemperature();
+                            }
+
+                            (a) Schreiben Sie eine nicht abstrakte, öffentliche Klasse FakeWeather , die das Weather -
+                            Interface implementiert. Als aktuelle Temperatur soll irgendeine beliebige Zahl zurückgeben
+                            werden.
+
+                            FakeWeather.java 
+
+
+
+
+                            (b) Vervollständigen Sie die Klasse Customer . Jedes Customer -Objekt speichert eine
+                                E-Mail-Adresse und einen Namen, die beide dem öffentlichen Konstruktor als Parameter
+                                übergeben werden. Die zwei Eigenschaften sollen außerdem von öffentlichen
+                                Methoden getMail() bzw. getName() zurückgegeben werden.
+
+                                Customer.java 
+                                public class Customer {
