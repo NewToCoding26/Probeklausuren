@@ -184,7 +184,7 @@ public class Binner {
 
 
 
-Aufgabe 3
+///// Aufgabe 3
 (a) [1 Punkt]
 Gegeben sei der reguläre Ausdruck [a-z0-9] + [a-z]. Kreuzen sie alle Strings an, die vollständig von diesem Ausdruck gematcht werden.
 
@@ -203,7 +203,7 @@ Der oben ausgegebene Ausdruck ist gleichbedeutend mit:
 [][a-z0-9] [a-z0-9] * [a-z]
 
 
-Aufgabe 4
+///// Aufgabe 4
 Für eine Finanzanwendung soll ein Programm für Zinseszinsrechnung erstellt werden. Vervollständigen sie dafür die Klasse *Zinsen*:
 
 (a) [3 Punkte]
@@ -265,7 +265,7 @@ public static void main (String[] args) {
     } while (endKapital (KkleinerO, p, n - 1) <= KkleinerO * 2)
 }
 
-Aufgabe 5
+///// Aufgabe 5
 Gehen sie in dieser Aufgabe davon aus, dass n € N und n >= 1 gilt.
 Eine natürliche Zahl n ist eine perfekte Zahl, wenn die Summe ihrer natürlichen Teiler (n ausgeschlossen) gleich n ist. Die kleinste per-
 fekte ist 6 (Telersumme 1 + 2 + 3 = 6).
@@ -351,25 +351,53 @@ Gegeben sei die folgende Klasse:
 Studi.java
 public class Studi {
     private final String name;
-    private final double radius;
+    private final double schnitt;
 
-    public Circle(double r) {
-        radius = r;
+    public Studu(String name, double notendurschnitt) {
+        this.name = name;
+        this.schnitt = notendurschnitt;
     }
 
-    //gibt den Flächeninhalt des Kreises zurück
-    public double area() {
-        return Math.PI * radius * radius;
+    public double getSchnitt() {
+        return schnitt;
+    }
+
+    public double getName() {
+        return name;
     }
 }
 
 (a) [6 Punkte]
-Ergänzen sie die Klasse um eine öffentliche, statische Methode sort, die ein Array von Circle-Objekten übergeben bekommt und absteigend
-nach ihrem Flächeninhalt sortiert; das übergebene Array soll dabei von der Methode verändert werden (die Methode hat also keinen rückgabe-
-wert). Gehen sie davon aus, das kein wert im übergebenen Array null ist. Falls der Methode null übergeben wird, soll es keine Exception
-geben (die Methode macht also nichts)
+Vervollständigen sie die Klassen methode nachNote, die ein Array von Studi-Objekten übergeben bekommt und ein neues Array zurückgeben soll,
+in dem die selben objekte aufsteigend nach ihrer Durchschnittsnote sortiert sind (beste(also kleinste) note am anfang); die Reihenfolge der 
+Objekte im übergebenden Array soll dabei von der methode nicht verändert werden, das original array und das sortierte array sollen die sel-
+ben objekte im heap refferenzieren.
+Falls der methode null übergeben wird, soll eine IllegalArgumentException gworfen werden. Sie dürfen davon ausgehen, dass kein Wert im über-
+gebenden array null ist.
 
-Lösung:
+Studi.java (Fortsetung)
+
+public static ___Studi[]____ nachNote (Studi[] studisOrig) {
+    if(studiOrig == null) {
+        ______throw new IllegalArgumentException()______;
+    }
+    __Studi[]__ studis = new Studi ___[studisOrig.length]___;
+    for(int i = 0; i < studis.length; i++) {
+        ____studis[i] = studisOrig[i]____;
+    }
+    for(int i = __1__; i < studis.length; i++) {
+        ___studi: cs = studis[i]___;
+        int einfPos = 1;
+        while(einfPos > 0 && _____studis[einfPos - 1].schnitt > cs.schnitt)____ {
+            ____Studis[einfPos] = studis[einfPos - 1]____;
+            einfPos--
+        }
+        ____studis[einfPos] = cs ____;
+    }
+    ____return studis__;
+}
+
+//// Lösung:
 public static void sort (Circle[] cs) {
     if(cs == null) {
         return;
@@ -386,12 +414,90 @@ for(int ci = 0; ci < cs.length; ci++) {
 
 Circle.java (Fortsetung)
 
-(b) [2 Punkte]
+//// (b) [2 Punkte]
 Angenommen, sie müssten häugiger 1 Millionen Kreise nach ihrer Größe sortieren. Würden sie dafür eine Sortiermethode benutzen, die In-
 sertion Sort verwendet? Begründen sie ihre Antwort in 1-2 Sätzen und schlagen sie ggf. eine Alternative vor.
 
 Lösung:
 Nein, da Insertion-Sort ein langsames Sortierverfahren ist, als Alternative würde ich Mergesort nutzen.
+
+
+Ergänzen sie die klasse Auflistung um folgende private, statische methoden. Sie dürfen immer davon ausgehen, dass kein Array und kein
+array und kein array-wert null sind.
+
+(b) [7 Punkte]
+Studi[] zugelassen (Studi[]) gibt ein neues Studi array zurück, das nur genau die Studi-Objekte aus dem übergebenden Array entält, deren
+Durchschnittsnoten kleiner als 3.0 ist.
+
+(c) [4 Punkte]
+String[] namen(Studi[]): Gibt die namen aller Studi-Objekte im übergebenden Array zurück (lässt Rheienfolge unverändert).
+
+(d) [3 Punkte]
+void ausgeben (String[]): Gibt die übergebenden Strings auf der Standardausgabe aus (lässt Rheienfolge unverändert).
+
+(e) [4 Punkte]
+Vervollständigen sie die main Methode, sodass die Namen aller bereits angelegten Studis mit einer Durchschnittsnote kleiner 3.0 ausgegeben
+werden, wobei die Studis aufsteigend nach Durchschnittsnote sortiert sind. Sie müssen dabei alle in dieser Aufgabe geschriebenden Methoden
+verwenden, vergessen sie nicht, dass nachnote in einer anderen klasse steht. Der Code muss auch dann korrekt funktionieren, wenn die 
+Eigenschaften der drei vorgegebenden Objekte anders wären.
+
+Auflistung.java
+public class Auflistung {
+    private static Studi[] zugelassen(Studi[] studis) {
+        int s =0;
+        For(Studi studi: studis) {
+            if(studi.getSchnitt() < 3.0) {
+                s++;
+            }
+        }
+        Studi[] sts = new Studi[s];
+        int i = =,
+        For(Studi studi: studis) {
+            if(studi.getSchnitt() < 3.0) {
+                sts[i] = studi;
+                i++;
+            }
+        }
+        return sts;
+
+    }
+    private static String[] namen (Studi[] sts) {
+        String n = new String[sts.length];
+        for (int i= 0; i < sts.length; i++) {
+            n[i] = sts[i].getName();
+
+        }
+    }
+    private static void ausgeben(String[] sts) {
+        for(String s: sts) {
+            System.out.print(s);
+        }
+    }
+
+    public static void main(String[] args) {
+    Studi kim = new Studi ("Kim", 2.5);
+    Studi marlin = new Studi ("marlin", 3.3);
+    Studi sasha = new Studi ("sasha", 1.4);
+
+    studi sts[] = {kim, marlin, sasha};
+
+
+    ausgeben(namen(zugelassen(Studi.nachNote(sts))));
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Aufgabe 7
 Gegeben sei die folgende Klasse List, die eine einfach verkettete Liste implemetiert, in der Integer gespeichert werden können:
