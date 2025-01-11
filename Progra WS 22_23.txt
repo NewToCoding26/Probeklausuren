@@ -184,16 +184,16 @@ public class Binner {
 
 
 
-///// Aufgabe 3
+Aufgabe 3
 (a) [1 Punkt]
-Gegeben sei der reguläre Ausdruck [a-z0-9] + [a-z]. Kreuzen sie alle Strings an, die vollständig von diesem Ausdruck gematcht werden.
+Gegeben sei der reguläre Ausdruck [ABCD][0-9]+. Kreuzen sie alle Strings an, die vollständig von diesem Ausdruck gematcht werden.
 
-[]123a
-[]123A
-[]a123b
-[]1ab
-[]1a
-[]a
+[]a0
+[x]A4
+[x]B10
+[]A-4
+[]G7
+[]5G
 
 (b) [1 Punkt]
 Der oben ausgegebene Ausdruck ist gleichbedeutend mit:
@@ -487,41 +487,77 @@ public class Auflistung {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 Aufgabe 7
-Gegeben sei die folgende Klasse List, die eine einfach verkettete Liste implemetiert, in der Integer gespeichert werden können:
+Gegeben sei die folgende Klasse List, die eine einfach verkettete Liste implemetiert, in der Doubles gespeichert werden können:
 
 List.java
 public class List {
     private class Node {
-        private int data;
+        private double data;
         private Node next;
 
-        private Node(int data, Node next) {
+        private Node(double data, Node next) {
             this.data = data;
             this.next = next;
         }
     }
-    pricate Node head;
+    private Node head;
 
-    // fügt value vorne in die Liste ein
-    public void prepend(int value) {
-        head = new Node (value, head);
+    public List(double[]  initialValues) {
+        for(int i = initialValues.length - 1; i >= 0; i--) {
+            head = new Node(initialValues[i], head);
+        }
+    }
+
+    public String toString() {
+        // ...(nicht abgedruckt)
+    }
+
+    public void removeNegative() {
+        Node current = head;
+        while(current != null) {
+            while(current.next != null && current.next.data < 0) {
+                current.next = current.next.next;
+            }
+            current = current.next;
+        }
     }
 }
 
-(a) [6 Punkte]
+Die Methode void removeNegative() soll alle doubles aud der Liste entfernen, die kleiner als 0 sind. Die methode funktioniert aber nicht
+richtig; beim folgenden Testaufruf gibt es eine unerwartete ausgabe.
+
+Test.java
+public class Test {
+    public static void main(String[] args) {
+        double[] listElemente = {-5.3, -2, 5, 3, -3.3, -2.2};
+        List list = new List(listElemente);
+        System.out.println(list); // erwartet -5.3, -2.0, 5.0, 3.0, -3.3, -2.2,
+        list.removeNegative();
+        System.out.println(list); // erwartet 5.0, 3.0
+    }
+}
+
+% java Test 
+-5.5, -2.0, 5.0, 3.0, -3.3, -2.2,
+-5.3, 5.0, 3.0,
+
+Geben sie eine korrigierte Implementierung der Methodean , alternativ können sie auch eindeutig beschreiben, wie die Fehlerhafte Implemen-
+tierung korrigiert werden kann.
+
+Ihre Lösung
+public void removeNegative() {
+    bei einfügen:
+
+    while(head != null && head.data < 0) {
+        head = head.next;
+
+    }
+
+
+}
+
+ //// (a) [6 Punkte]
 Vervollständigen sie die Implementierung der Methode int removeNegative(), die alle Zahlen aud der Liste entfernt, die negativ sind. Der
 Rückgabewert soll angeben, wie viele Zahlen entfernt worden sind.
 
@@ -545,30 +581,32 @@ public int removeNegative() {
 }
 
 (b) [3 Punkte]
-Alice möchte in einem größerem Programmierprojekt verkettete Listen benutzen. Sie schlägt vor, eine generische Klasse List<T> selbst zu
-implementieren. Bob sagt, dass die lieber die fertige Klasse java.util.LinkedList<T> aus dem JDK verwenden sollte.
+Wie wollen in einer Datenstruktur speichern, welche Matrikelnummern sich für den Studiengang Informatik angemeldet haben; die anzahl der 
+Matrikelnummern ist vorab nicht bekannt, die gespeicherte Rheienfolge ist egal. Später wollen wir sehr oft überprüfen, ob eine Matrikel-
+nummer in der Datenstruktur vorhanden ist. Troy schlägt vor ein Hashset zu benutzen. Gabi meint es sollte lieber ein Array benutzt werden.
+
 
 (i)
-Würden sie eher den Vorschlag von Alice oder den von Bob umsetzen? Geben sie einen nachvollziehbaren Grund in 1-3 ausformulierten Sätzen an.
+Würden sie eher den Vorschlag von Troy oder den von Gabi umsetzen? Geben sie einen nachvollziehbaren Grund in 1-3 ausformulierten Sätzen an.
 
 Antwort:
-Ich würde auf Bob hören, da fertige Listen besser getestet sind, sie zeit sparen & auch mit anderen Bibiotheken kompatibel sind.
+Ich würde auf Troy hören, da das nachkucken schneller geht als im Array, ab einer bestimmten größe, und Array speichert eine Rheienfolge ab
+die wird garnicht brauchen
 
-Alice erwiedert, dass die ihre eigene Klasse bevorzugt, weil sie nicht jedes mal, wenn sie eine LinkedList erstellt, das längliche new 
-java.util.LinkedList<>() benutzen möchte.
-
-(ii)
-Halten sie dieses Argument von Alice für ein nachvollziehbares/starkes Argument? Begründen sie ihre Antwort in 1-2 ausformulierten sätzen.
+Angenommen sie wollen eine einfach verkettete Liste in einer java Anwendung verwenden.Warum ist es sinnvoller die JDK Klasse java.util.Lin-
+kedList<E> zu verwenden, anstatt eine Liste selbst zu implementieren? Geben sie einen nachvollziehbaren Grund in 1-3 ausformulierten Sätzen.
 
 Antwort:
-Kein gutes argument, da man LinkedList auch einfach importieren kann.
+
+Es ist sinnvoller die JDK Klasse zu nutzen, weil sie schon besser getestet sind und zeit sparen.
+
 
 
 Aufgabe 8
-Gegeben sei die Klasse SearchTree für einen binären Suchbaum, in dem Doubles gespeichert werden können:
+Gegeben sei die Klasse Tree für einen binären Suchbaum, in dem Doubles gespeichert werden können:
 
-SearchTree.java
-public class SearchTree {
+Tree.java
+public class Tree {
     private class BinaryNode {
         private double element;
         private BinaryNode left, right;
@@ -578,41 +616,64 @@ public class SearchTree {
         }
     }
 
+    private BinaryNode root;
+
     //fügt newNumber in den Baum ein
     public void insert (double newNumber) {
         // (Implementierung nicht abgedruckt)
     }
 }
 
-Vervollständigen die die Methode double sumGreaterThan(double t), die die Summe aller Einträge im Baum zurückgibt, die größer als t sind;
+Vervollständigen die die Methode int countLarge(), die die Anzahl aller Einträge im Baum zurückgibt, die größer oder gleich 100 sind;
 bei einem leeren Suchbaum ist diese Summe gleich 0. Nutzen sie in ihrem code Eigenschafften eines binären Suchbaumes aus, um die Anzahl der
 betrachteten Knoten minimal zu halten. Sie dürfen zusätzliche Hilfsmethoden mit minimaler Sichtbarkeit schreiben.
 
-SearchTree.java (Fortsetung)
-public double sumGreaterThan(double t) {
-    return sumGreaterThan(t, root);
+Tree.java (Fortsetung)
+public int countLarge() {
+    return countLarge(root);
 }
-private static double sumGreaterThan(double t, BinaryRoot str) {
-    if(str == null) {
+private int countLarge(BinaryRoot root) {
+    if(root == null) {
         return 0;
     }
-    if(str.element <= t) {
-        return sumGreaterThan(t, root.right);
+    if(root.element >= 100) {
+        return 1+ countLarge(root.left) + countLarge(root.right);
     }
-    return str.element + sumGreaterThan(t, root.left) + sumGreaterThan(t, root.right);
+    retrun countLarge(root.right);
 }
 
+
+
 Aufgabe 9
-In dieser Aufgabe sollen sie Klassen und Methoden für ein Computerspiel implementieren.
+In dieser Aufgabe sollen sie Klassen und Methoden für ein Versand von Briefen und Paketen zwischen verschiedenen Standorten eines Unterneh-
+mens programmieren. 
 
 Hinweise:
 -Sie dürfen alle Variablennamen frei wählen.
 -Alle Instanzvariablen müssen privat sein
+-Wählen sie Sinnvolle Datentypen für ihre Variable.
+-Wenn kein Konstruktorverhalten vorgechrieben ist, reicht der default-Konstruktor.
 -Das genaue format der Textausgaben ist ihne überlassen.
 -Innerhalb dieseer Aufgaben müssen sie keine Exception abfangen. Sie müssen keine Parameter vallidieren.
 -Lesen sie sich die aufgabe stelleung vor Beginn der Implementierung vollständig durch, um einen besser überblick über das Gesamtbild zu
 erhalten
 -Gehen sie davon aus, dass alle in dieser Aufgabe gennatnten Klassen im selben Package liegen
+
+
+Gegeben ist das Interface Sendable, das eine einzele Sendung beschreibt.
+
+Sendable.java
+public interface Sendable {
+    // gibt den Absende-Standort zurück
+    Location senderLocation();
+    // gibt den Empfang-Standort zurück
+    Location receiverLocation();
+    // gibt das Gewicht einer Sendung in gramm (g) zurück
+    double weight;
+}
+
+                                                    Sendable
+                            Location        Letter              Parcel      Delivery
 
 (a) [8 Punkte]
 Schreiben sie eine abstrakte, öffentliche Klasse Task, in welcher es eine Objektvariable gibt, die angibt, ob der task beendet ist oder 
